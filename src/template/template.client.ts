@@ -18,9 +18,22 @@ export class TemplateClient {
         return this.client.get(`/`);
     }
 
-    getTemplateWithData(templateName: string, data: any): Promise<string>{
-        return this.client.post(`/template/${templateName}`, data);
+    getTemplateHtml(templateName: string, data: any): Promise<string>{
+        return this.client.post(`/template/${templateName}?type=html_string`, data);
     }
+
+    getTemplatePdfBuffer(templateName: string, data: any): Promise<ArrayBuffer> {
+        return this.client.post(`/template/${templateName}?type=pdf_buffer`, data, {
+            responseType: 'arraybuffer'
+        });
+    }
+    getTemplatePdfStream(templateName: string, data: any): Promise<ArrayBuffer> {
+        return this.client.post(`/template/${templateName}?type=pdf_stream`, data, {
+            responseType: 'stream'
+        });
+    }
+
+
 
     getAllTemplateInformation(): Promise<IAllTemplateInfo> {
         return this.client.get(`/template/`);

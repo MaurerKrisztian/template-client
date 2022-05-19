@@ -1,6 +1,6 @@
 {
   "name": "@maurerkrisztian/tempalte-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "author": "Maurer Kirsztian",
   "license": "MIT",
@@ -32,11 +32,11 @@
     "url": "https://github.com/MaurerKrisztian/template-client"
   },
   "bugs": "https://github.com/MaurerKrisztian/template-client",
-  "peerDependencies": {
-  },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
+    "@types/nodemailer": "^6.4.4",
+    "nodemailer": "^6.7.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
@@ -57,7 +57,7 @@
     "tsc-watch": "2.2.1",
     "tsconfig-paths": "3.8.0",
     "tslint": "5.16.0",
-    "typescript": "3.4.3"
+    "typescript": "3.5.1"
   },
   "jest": {
     "moduleFileExtensions": [

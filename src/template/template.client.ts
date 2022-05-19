@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import {Utils} from './utils';
 import {ITemplateOptions} from "./ITemplate-options";
+import * as Mail from "nodemailer/lib/mailer";
 
 @Injectable()
 export class TemplateClient {
@@ -27,13 +28,12 @@ export class TemplateClient {
             responseType: 'arraybuffer'
         });
     }
+
     getTemplatePdfStream(templateName: string, data: any): Promise<ArrayBuffer> {
         return this.client.post(`/template/${templateName}?type=pdf_stream`, data, {
             responseType: 'stream'
         });
     }
-
-
 
     getAllTemplateInformation(): Promise<IAllTemplateInfo> {
         return this.client.get(`/template/`);
@@ -51,6 +51,13 @@ export class TemplateClient {
         return this.client.get(`/template/${templateName}/raw`);
     }
 
+
+    /**
+     * Send mail with template
+    * */
+    sendMailWithTemplate(body: IEmailBody) {
+        return this.client.post(`/mail`, body);
+    }
 }
 
 
@@ -65,4 +72,10 @@ export interface ITemplateInfo {
     exampleDataLink: string,
     rawHtml: string,
     note: string
+}
+
+
+export interface IEmailBody {
+    mailOptions: Omit<Mail.Options, 'html'>;
+    template: { name: string; data: any };
 }
